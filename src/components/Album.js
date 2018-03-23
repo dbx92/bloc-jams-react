@@ -5,7 +5,7 @@ import albumData from './../data/albums';
 class Album extends Component {
   constructor(props) {
     super(props);
-
+    //the Album component should be a button in library? instead of a link? or fill a blank
     const album = albumData.find( album => {
       return album.slug === this.props.match.params.slug
     });
@@ -30,6 +30,13 @@ class Album extends Component {
             <col id="song-duration-column" />
           </colgroup>
           <tbody>
+            {this.state.album.songs.map( (song, index) =>
+             <tr className="song" key={index} >
+                <td className="song-number">{index+1}</td>
+                <td className="song-title">{song.title}</td>
+                <td className="song-duration">{song.duration}</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </section>
