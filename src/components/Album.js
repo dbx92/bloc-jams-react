@@ -45,6 +45,7 @@ class Album extends Component {
       this.play();
     }
   }
+
   handlePrevClick(){
     const currentIndex = this.state.album.songs.findIndex(song => this.state.currentSong ===song);
     const newIndex = Math.max(0,currentIndex - 1);
@@ -54,11 +55,15 @@ class Album extends Component {
   }
   handleNextClick(){
     const currentIndex = this.state.album.songs.findIndex(song => this.state.currentSong ===song);
-    const newIndex = Math.min(4,currentIndex + 1);
+    const newIndex = Math.min(this.state.album.songs.length -1,currentIndex + 1);
     const newSong = this.state.album.songs[newIndex];
+    if(currentIndex===newIndex){
+      this.pause();
+    }else{
     this.setSong(newSong);
     this.play(newSong);
   }
+}
    render() {
      return (
       <section className="album">
@@ -79,9 +84,11 @@ class Album extends Component {
           <tbody>
             {this.state.album.songs.map( (song, index) =>
              <tr className="song" key={index} onClick ={() => this.handleSongClick(song)} >
+                <button>
                 <td className="song-number">{index+1}</td>
                 <td className="song-title">{song.title}</td>
                 <td className="song-duration">{song.duration}</td>
+                </button>
               </tr>
             )}
           </tbody>
