@@ -126,7 +126,7 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-             <tr className="song" key={index} onClick ={() => this.handleSongClick(song)} >
+             <tr className="song" key={index} onClick ={() => this.handleSongClick(song)}>
                 <td className="song-number">{index+1}</td>
                 <td className="song-title">{song.title}</td>
                 <td className="song-duration">{this.formatTime(song.duration)}</td>
@@ -148,7 +148,7 @@ class Album extends Component {
           formatTime={(e) => this.formatTime(e)}
          />
       </section>
-    );
+  );
   }
 }
 export default Album;
