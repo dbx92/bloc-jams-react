@@ -108,13 +108,13 @@ class Album extends Component {
      const newTime = minutes+":"+seconds;
      return newTime;
    }
-   onHover(e,song){
+   /*onHover(e,song){
      console.log(e.target);
      const newIcon = <span className='ion-play'> </span>
      if(this.state.isPlaying=false){
-          
+
      }
-   }
+   }*/
 
    render() {
      return (
