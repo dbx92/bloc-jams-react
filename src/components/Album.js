@@ -21,6 +21,7 @@ class Album extends Component {
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+    this.audioElement.volume = .4;
   }
 
   play() {
@@ -88,10 +89,11 @@ class Album extends Component {
 }
 
   handleVolumeChange(e){
-    console.log("volume changed");
+
     const newVolume =  e.target.value;
-    this.audioElement.currentVolume = newVolume;
+    this.audioElement.volume = (newVolume/10);
     this.setState({currentVolume:newVolume});
+      console.log(newVolume);
   }
 
   handleTimeChange(e) {
@@ -105,6 +107,13 @@ class Album extends Component {
      const seconds = Math.round(time - minutes * 60);
      const newTime = minutes+":"+seconds;
      return newTime;
+   }
+   onHover(e,song){
+     console.log(e.target);
+     const newIcon = <span className='ion-play'> </span>
+     if(this.state.isPlaying=false){
+          
+     }
    }
 
    render() {
@@ -126,7 +135,7 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-             <tr className="song" key={index} onClick ={() => this.handleSongClick(song)}>
+             <tr className="song" key={index} onClick ={() => this.handleSongClick(song)} onMouseOver={(e) => this.onHover(e,song)}>
                 <td className="song-number">{index+1}</td>
                 <td className="song-title">{song.title}</td>
                 <td className="song-duration">{this.formatTime(song.duration)}</td>
@@ -139,7 +148,7 @@ class Album extends Component {
           currentSong={this.state.currentSong}
           currentTime={this.audioElement.currentTime}
           duration={this.audioElement.duration}
-          volume={this.audioElement.currentVolume}
+          volume={this.state.currentVolume}
           handleVolumeChange={(e)=>this.handleVolumeChange(e)}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
