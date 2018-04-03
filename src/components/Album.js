@@ -108,14 +108,14 @@ class Album extends Component {
      const newTime = minutes+":"+seconds;
      return newTime;
    }
-   onHover(e,song){
+   /*onHover(e,song){
      console.log(e.target);
      const newIcon = <span className='ion-play'> </span>
      if(this.state.isPlaying=false){
 
      }
    }
-
+*/
    render() {
      return (
       <section className="album">
@@ -135,16 +135,10 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-<<<<<<< HEAD
-             <tr className="song" key={index} onClick ={() => this.handleSongClick(song)} >
-                <button>
-=======
              <tr className="song" key={index} onClick ={() => this.handleSongClick(song)} onMouseOver={(e) => this.onHover(e,song)}>
->>>>>>> range-inputs
                 <td className="song-number">{index+1}</td>
                 <td className="song-title">{song.title}</td>
-                <td className="song-duration">{song.duration}</td>
-                </button>
+                <td className="song-duration">{this.formatTime(song.duration)}</td>
               </tr>
             )}
           </tbody>
@@ -154,15 +148,14 @@ class Album extends Component {
           currentSong={this.state.currentSong}
           currentTime={this.audioElement.currentTime}
           duration={this.audioElement.duration}
-<<<<<<< HEAD
-=======
           volume={this.state.currentVolume}
           handleVolumeChange={(e)=>this.handleVolumeChange(e)}
->>>>>>> range-inputs
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
           handleNextClick={() => this.handleNextClick()}
-          />
+          handleTimeChange={(e) => this.handleTimeChange(e)}
+          formatTime={(e) => this.formatTime(e)}
+         />
       </section>
   );
   }
