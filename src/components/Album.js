@@ -21,6 +21,7 @@ class Album extends Component {
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+    this.audioElement.volume = .4;
   }
 
   play() {
@@ -86,6 +87,35 @@ class Album extends Component {
     this.play(newSong);
   }
 }
+
+  handleVolumeChange(e){
+
+    const newVolume =  e.target.value;
+    this.audioElement.volume = (newVolume/10);
+    this.setState({currentVolume:newVolume});
+      console.log(newVolume);
+  }
+
+  handleTimeChange(e) {
+     const newTime = this.audioElement.duration * e.target.value;
+     this.audioElement.currentTime = newTime;
+     this.setState({ currentTime: newTime });
+   }
+
+   formatTime(time){
+     const minutes = Math.floor(time/60);
+     const seconds = Math.round(time - minutes * 60);
+     const newTime = minutes+":"+seconds;
+     return newTime;
+   }
+   onHover(e,song){
+     console.log(e.target);
+     const newIcon = <span className='ion-play'> </span>
+     if(this.state.isPlaying=false){
+
+     }
+   }
+
    render() {
      return (
       <section className="album">
@@ -105,8 +135,12 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
+<<<<<<< HEAD
              <tr className="song" key={index} onClick ={() => this.handleSongClick(song)} >
                 <button>
+=======
+             <tr className="song" key={index} onClick ={() => this.handleSongClick(song)} onMouseOver={(e) => this.onHover(e,song)}>
+>>>>>>> range-inputs
                 <td className="song-number">{index+1}</td>
                 <td className="song-title">{song.title}</td>
                 <td className="song-duration">{song.duration}</td>
@@ -120,12 +154,17 @@ class Album extends Component {
           currentSong={this.state.currentSong}
           currentTime={this.audioElement.currentTime}
           duration={this.audioElement.duration}
+<<<<<<< HEAD
+=======
+          volume={this.state.currentVolume}
+          handleVolumeChange={(e)=>this.handleVolumeChange(e)}
+>>>>>>> range-inputs
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
           handleNextClick={() => this.handleNextClick()}
           />
       </section>
-    );
+  );
   }
 }
 export default Album;
