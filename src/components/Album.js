@@ -87,9 +87,19 @@ class Album extends Component {
     this.play(newSong);
   }
 }
-
+ handleVolumeDown(){
+   const newVolume = this.state.currentVolume - 1;
+   this.audioElement.volume = (newVolume/10);
+   this.setState({currentVolume:newVolume});
+   console.log(newVolume);
+ }
+ handleVolumeUp(){
+   const newVolume = this.state.currentVolume + 1;
+   this.audioElement.volume = (newVolume/10);
+   this.setState({currentVolume:newVolume});
+   console.log(newVolume);
+ }
   handleVolumeChange(e){
-
     const newVolume =  e.target.value;
     this.audioElement.volume = (newVolume/10);
     this.setState({currentVolume:newVolume});
@@ -108,11 +118,12 @@ class Album extends Component {
      const newTime = minutes+":"+seconds;
      return newTime;
    }
-   onHover(e,song){
+  onHover(e,song){
      console.log(e.target);
-    /* const newIcon = <span className='ion-play'> </span>
-     if(this.state.isPlaying=false){
-
+    /* const newIcon = <span className='ion-play'></span>
+     const arr = this.state.
+    /if(this.state.isPlaying=false){
+       this.setState({song:newIcon});
      }*/
    }
 
@@ -149,12 +160,15 @@ class Album extends Component {
           currentTime={this.audioElement.currentTime}
           duration={this.audioElement.duration}
           volume={this.state.currentVolume}
+          handleVolumeUp = {() => this.handleVolumeUp()}
+          handleVolumeDown = {() => this.handleVolumeDown()}
           handleVolumeChange={(e)=>this.handleVolumeChange(e)}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
           handleNextClick={() => this.handleNextClick()}
           handleTimeChange={(e) => this.handleTimeChange(e)}
           formatTime={(e) => this.formatTime(e)}
+
          />
       </section>
   );
