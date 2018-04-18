@@ -19,27 +19,27 @@ class PlayerBar extends Component {
           <div className="current-time">{this.props.currentTime}</div>
           <input
             type="range"
-            className="seek-bar"
+            className="mdl-slider mdl-js-slider"
             value={(this.props.currentTime / this.props.duration) || 0}
             max='1'
             min='0'
-            step='0.1'
+            step='0.01'
             onChange={this.props.handleTimeChange}
              />
           <div className="total-time">{this.props.duration || 0}</div>
         </section>
         <section id="volume-control">
-          <div className="icon ion-volume-low" onClick = {this.props.handleVolumeDown}></div>
+          <div className="material-icons" onClick = {this.props.handleVolumeDown}>volume_down</div>
           <input
               type="range"
-              className="seek-bar"
+              className="mdl-slider mdl-js-slider"
               value={this.props.volume}
               max="10"
               min="1"
               step="1"
               onChange={this.props.handleVolumeChange}
                />
-          <div className="icon ion-volume-high" onClick = {this.props.handleVolumeUp}></div>
+          <div className="material-icons" onClick = {this.props.handleVolumeUp}>volume_up</div>
         </section>
       </section>
     );

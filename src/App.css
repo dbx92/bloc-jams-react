@@ -7,6 +7,20 @@
   height: 80px;
 }
 
+.song .ion-play,.song .ion-pause {
+  display:none;
+}
+.song-active-play .ion-play{
+  display:block;
+}
+
+.song-active-play .song-number, .song-active-pause .song-number{
+  display:none
+}
+.song-active-pause .ion-pause{
+  display:block;
+}
+
 .App-header {
   background-color: #222;
   height: 150px;

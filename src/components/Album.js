@@ -118,13 +118,23 @@ class Album extends Component {
      const newTime = minutes+":"+seconds;
      return newTime;
    }
-  onHover(e,song){
-     console.log(e.target);
-    /* const newIcon = <span className='ion-play'></span>
-     const arr = this.state.
-    /if(this.state.isPlaying=false){
-       this.setState({song:newIcon});
-     }*/
+  onHover(e){
+    const row = e.target.parentElement;
+    const songNumber = row.firstChild;
+    if(this.state.isPlaying===true){
+      songNumber.className = "song-active-pause";
+    }
+    if(this.state.isPlaying===false){
+      songNumber.className = "song-active-play";
+    }
+    console.log(songNumber);
+     console.log(row);
+
+   }
+   onLeave(e){
+     const row = e.target.parentElement;
+     const songNumber = row.firstChild;
+     songNumber.className = "song-number";
    }
 
    render() {
@@ -146,8 +156,12 @@ class Album extends Component {
           </colgroup>
           <tbody>
             {this.state.album.songs.map( (song, index) =>
-             <tr className="song" key={index} onClick ={() => this.handleSongClick(song)} onMouseOver={(e) => this.onHover(e,song)}>
-                <td className="song-number">{index+1}</td>
+             <tr className="song" key={index} onClick ={() => this.handleSongClick(song)} onMouseEnter={(e) => this.onHover(e,song)} onMouseLeave = {(e) => this.onLeave(e,song)}>
+                <td >
+                  <span className = "ion-play"></span>
+                  <span className = "ion-pause"></span>
+                  <span className = "song-number">{index+1}</span>
+                  </td>
                 <td className="song-title">{song.title}</td>
                 <td className="song-duration">{this.formatTime(song.duration)}</td>
               </tr>
